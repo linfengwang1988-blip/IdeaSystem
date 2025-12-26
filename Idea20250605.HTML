@@ -1,0 +1,1258 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="icon" type="image/png"
+        href="https://prod-21.westus.logic.azure.com:443/workflows/30e78b7adb8941ea8a9ae2a1f94c0be7/triggers/manual/paths/invoke?api-version=2016-06-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=dv60GXpbbErNMF7Yd6Rw4qK8I6gqpuvTFD3EQMqXEZ4&URL=/Idea System/HTML Source/建议.png">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!--  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />  锁定手指缩放-->
+    <meta http-equiv="nocache" content="no-cache">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Cache-Control" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    <title>RMDx Hangzhou Idea System 杭州工厂合理化建议系统 v2.0</title>
+    <style>
+        body {
+            height: 100%;
+            width: 100%;
+            /* 确保父容器高度占满视口 */
+            margin: 0px;
+            /* 清除默认边距 */
+            display: flex;
+            /* 启用 Flex 布局 */
+            justify-content: center;
+            /* 水平居中 */
+            align-items: center;
+            /* 垂直居中 */
+            padding-top: 0px;
+            display: flex;
+            background-image: url('https://prod-21.westus.logic.azure.com:443/workflows/30e78b7adb8941ea8a9ae2a1f94c0be7/triggers/manual/paths/invoke?api-version=2016-06-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=dv60GXpbbErNMF7Yd6Rw4qK8I6gqpuvTFD3EQMqXEZ4&URL=/Idea System/HTML Source/Background.jpg');/* https://prod-21.westus.logic.azure.com:443/workflows/30e78b7adb8941ea8a9ae2a1f94c0be7/triggers/manual/paths/invoke?api-version=2016-06-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=dv60GXpbbErNMF7Yd6Rw4qK8I6gqpuvTFD3EQMqXEZ4&URL=/Idea System/HTML Source/Background.jpg */
+            background-size: cover;
+            /* 覆盖整个页面 */
+            background-repeat: no-repeat;
+            /* 禁止重复 */
+            background-position: center;
+            /* 居中显示 */
+            background-attachment: fixed;
+            /* 固定背景不滚动 (可选) */
+        }
+
+        /*   等待动画样式 */
+        .waitting {
+            position: fixed;
+            top: 0px;
+            left: 0px;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            align-content: center;
+            z-index: 887;
+            display: none;
+            /* 默认隐藏 */
+        }
+
+        /* 转圈动画样式 */
+        .spinner-container {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .spinner {
+            width: 50px;
+            height: 50px;
+            border: 5px solid #f3f3f3;
+            border-top: 5px solid #3498db;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: auto;
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+
+        /*    登入器样式 */
+        .Login_Div {
+            background-color: rgba(0, 0, 0, 0.0);
+            align-content: center;
+            z-index: 886;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -52%);
+            /* 偏移自身宽高的50% */
+            width: 90%;
+
+
+        }
+
+        .Login-Form {
+            margin: auto;
+            width: 350px;
+            height: 290px;
+            padding-top: 30px;
+            padding-bottom: 30px;
+            background: #f9f9f95e;
+            /* 背景颜色 */
+            border-radius: 8px;
+            /* 圆角半径 */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            /* 阴影效果 */
+            overflow: hidden;
+            /* 确保内容不会超出圆角 */
+        }
+
+        .Login-Form input[type="text"],
+        .Login-Form input[type="number"],
+        .Login-Form select {
+            width: 65%;
+            height: 30px;
+            padding-left: 10px;
+            padding-right: 10px;
+            padding-bottom: 0px;
+            padding-top: 0px;
+            margin-bottom: 16px;
+            border-radius: 5px;
+            border: 1px solid black;
+        }
+
+        /* .Login-Form input[type="number"] {
+            width: 75%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+        } */
+
+        .submit,
+        .login,
+        .next,
+        .BacktoLogin {
+
+            width: 60px;
+            height: 40px;
+            background-color: rgb(35, 56, 76);
+            font-size: 18px;
+            font-weight: bold;
+            color: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            overflow: hidden;
+            transition: background-color 0.3s, transform 0.3s;
+            display: none;
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        /* 正文布局风格 */
+        .custom-div {
+            width: 50%;
+            min-width: 330px;
+            /* 根据需要调整宽度 */
+            background-color:
+                rgba(243, 243, 243, 0.95);
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            overflow: hidden;
+            margin-left: auto;
+            margin-right: auto;
+            padding-bottom: 20px;
+            padding-left: 20px;
+            padding-right: 20px;
+            padding-top: 20px;
+            margin-top: 60px;
+            margin-bottom: 10px;
+            display: none;
+            /* none; */
+        }
+
+        Question {
+            font-weight: bold;
+
+        }
+
+        .Submit-Form input[type="text"] {
+            width: 90%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: solid 1px;
+            border-radius: 5px;
+        }
+
+        .big-radio {
+            transform: scale(1.2);
+            margin-right: 2px;
+        }
+
+        .Submit-Form select {
+            width: 90%;
+            padding: 0px;
+            margin-bottom: 20px;
+            border: solid 1px;
+            border-radius: 5px;
+        }
+
+        .Submit-Form input[type="number"] {
+            width: 90%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+            border: solid 1px;
+        }
+
+        .Submit-Form textarea {
+            width: 90%;
+            padding: 10px;
+            margin-bottom: 0px;
+            border-radius: 5px;
+            border-color: black;
+        }
+
+        /* 图片上传效果 */
+        #image-before-Box {
+            text-align: center;
+        }
+
+        #image-before {
+            background: #64a1db;
+            color: white;
+            padding: 10px 20px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        /* //搜索框格式 */
+    </style>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+
+<body>
+    <!--   //空白图片 -->
+    <img ID="NoIMG" style='display: none;' alt="空白图片"
+        src="https://prod-21.westus.logic.azure.com:443/workflows/30e78b7adb8941ea8a9ae2a1f94c0be7/triggers/manual/paths/invoke?api-version=2016-06-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=dv60GXpbbErNMF7Yd6Rw4qK8I6gqpuvTFD3EQMqXEZ4&URL=/Idea System/HTML Source/无图.png" />
+
+    <!-- //页眉内容 -->
+    <table style='width:100%;margin:0;padding:0;position:fixed;left:0;top:0;z-index:888;border:0' cellpadding="0"
+        cellspacing="0">
+        <tr>
+            <td style='background:#009CDE;height:48px;color:white;vertical-align:middle;width:100px' cellspacing="0"
+                cellpadding="0">
+                <!--   雅培Logo -->
+                <img style='margin-left:10px;vertical-align:middle;width: 120px; ' alt="组织徽标"
+                    src="https://prod-21.westus.logic.azure.com/workflows/30e78b7adb8941ea8a9ae2a1f94c0be7/triggers/manual/paths/invoke?api-version=2016-06-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=dv60GXpbbErNMF7Yd6Rw4qK8I6gqpuvTFD3EQMqXEZ4&URL=/Power%20Platform%20Photo%20Library/%E6%96%87%E4%BB%B6%E8%BD%AC%E5%85%AC%E7%BD%91%E5%AD%98%E6%94%BE%E7%A9%BA%E9%97%B4/Abbott_Logo.png" />
+            </td>
+            <td
+                style='background:#009CDE;height:48px;color:white;vertical-align:middle;font-size:15px;;padding-left:20px;font-weight:bold'>
+                <Span style="font-size: 16px;">杭州工厂合理化建议系统 v2.0</Span>
+            </td>
+        </tr>
+        <!--        <tr>
+            <td colspan="2" style="background: #eee;padding:0px;">
+                <div style="border:0px solid;width:70px;margin:0;float:right;padding:2px 10px 5px 10px"
+                    class="hover-color" title="提交数据">
+                    <a onclick="SubmitDeliveryDates()"
+                        style="color: #555; font-size: initial; cursor: pointer; height: 25px; ">📤 提交</a>
+                </div>
+
+            </td>
+        </tr> -->
+    </table>
+    <!-- waiting模块 -->
+    <div class="waitting" id="waitting">
+        <div class="spinner-container">
+            <div class="spinner"></div>
+            <p class="loading-text;" style="color: white;margin-top: 20px;text-align: center;">
+                数据提交中，请稍候...</p>
+        </div>
+    </div>
+    <!-- login模块登入UPI跟姓名 -->
+    <div class="Login_Div" style="display: block">
+        <h1 style="margin-bottom: 10px ;text-align: center;color:rgb(0, 0, 0)">欢迎使用 Idea System</h1>
+
+        <form class="Login-Form" id="Login-Form">
+            <div class="input_div" style="margin-top: 0px;margin-bottom: 0px; text-align: center;">
+                <input type="text" ID="UPI" placeholder="请输入您的UPI或工号" required>
+                <input type="text" ID="name" placeholder="请输入您的中文姓名" required >
+                <select id="first-level-login" class="first-level" required style="width: 248px;" onchange="">
+                    <option value="">--请选择一级部门--</option>
+                </select>
+                <select id="second-level-login" disabled required style="width: 248px;">
+                    <option value="">--请选择二级部门--</option>
+                </select>
+            </div>
+            <div class="input_div" style="margin: auto;text-align: center;"><input type="number" ID="phone"
+                    placeholder="请输入您的手机号码（选填）"></div>
+            <button class="login" style="display: block;margin: auto;margin-top: 10px;width:200px;"
+                type="login">点击登入</button>
+
+        </form>
+
+    </div>
+
+
+    <div class="custom-div" ID="previewImgbox" style="display: none;width: 100%;height: 100%;"><img
+            style="width:90%;padding:10Px" ID="previewImg"
+            onclick="$('#previewImgbox').css('display','none');$('#custom-div').css('display','block')"
+            src="https://prod-21.westus.logic.azure.com:443/workflows/30e78b7adb8941ea8a9ae2a1f94c0be7/triggers/manual/paths/invoke?api-version=2016-06-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=dv60GXpbbErNMF7Yd6Rw4qK8I6gqpuvTFD3EQMqXEZ4&URL=/Idea System/HTML Source/赋分标准.png">
+    </div>
+    <div class="custom-div" ID="custom-div">
+        <form class="Submit-Form" id="Submit-Form">
+            <!--             问题1 -->
+            <div name="Question1" style="margin-bottom: 40px;">
+                <div class="input_div" style="margin: auto;text-align:left; padding-left: 4%;margin-bottom: 5px;">
+                    <span style="font-weight: bold;">1.现状及问题（图片可选）<label for="" style="color: red;">*</label></span>
+                </div>
+                <div class="input_div" style="margin: auto;text-align: center;margin-bottom: 0px;">
+                    <textarea class="custom-textarea" placeholder="请简要描述目前你需要反馈的现状或发现的问题" rows="2" maxlength="500"
+                        required ID="before" Style="font-family:Arial, sans-serif;border-radius: 5px;"></textarea>
+                </div>
+                <div class="input_div" ID="image-before-Box with"
+                    style="margin-left:4%;text-align:left; padding-left: 0%;margin-bottom: 5px;width: 90%;">
+                    <input type="file" id="image-before" name="image-before" accept="image/*" onchange=""
+                        style="width: 50%;padding-left: 10px;padding-right: 0px;min-width: 180px">
+                    <img id="preview" src="#" alt="预览图" style="display:none; max-width:200px;">
+                    <!--  <div id="file-name">未选择文件（可选）</div> -->
+                </div>
+            </div>
+            <!--问题2 -->
+            <div name="Question2" style="margin-bottom: 40px;">
+                <div class="input_div" style="margin: auto;text-align:left; padding-left: 4%;margin-bottom: 5px;">
+                    <span style="font-weight: bold;">2.建议改进方向<label for="" style="color: red;">*</label></span>
+                </div>
+                <div class="input_div" style="margin: auto;text-align: center;">
+                    <textarea class="custom-textarea" placeholder="请简要描述你的建议或者改进方法" rows="2" maxlength="500" required
+                        ID="after" Style="font-family:Arial, sans-serif;border-radius: 5px;"></textarea>
+                </div>
+
+            </div>
+            <!--问题3 -->
+            <div name="Question3" style="margin-bottom: 40px;">
+                <div class="input_div" style="margin: auto;text-align:left; padding-left: 4%;margin-bottom: 10px;">
+                    <span style="font-weight: bold;">3.合理化建议的灵感来源<label for="" style="color: red;">*</label></span>
+                </div>
+                <div class="input_div" style="margin: auto;text-align: start;padding-left: 4%">
+                    <div style="width: 40%;display: inline-block;">
+                        <input required type="radio" ID="复制其他案例" class="复制其他案例" onchange="Idea_From(this.value)"
+                            Style="transform: scale(1.2);margin-right: 2px;" name="合理化建议的灵感来源" value="复制其他案例"
+                            class="big-radio"> 复制其他案例
+                    </div>
+                    <div style="width:auto;display: inline-block; ">
+                        <input required type="radio" ID="自主创新" class="复制其他案例" onchange="Idea_From(this.value)"
+                            Style="transform: scale(1.2);margin-right: 2px;" name="合理化建议的灵感来源" value="自主创新"
+                            class="big-radio"> 自主创新
+                    </div>
+                </div>
+                <div class="input_div" style="margin: auto;text-align: center; margin-top: 5px;display: none;"
+                    ID="ideafrom">
+                    <textarea class="custom-textarea" placeholder="请描述复制来源是什么（例如：RCA编号，合理化建议编号，XX报告等）" rows="2"
+                        maxlength="500" ID="ideafrom_Input"
+                        Style="font-family:Arial, sans-serif;border-radius: 5px;"></textarea>
+                </div>
+
+            </div>
+            <!--问题4 -->
+            <div name="Question4" style="margin-bottom: 40px;">
+                <div class="input_div" style="margin: auto;text-align:left; padding-left: 4%;margin-bottom: 0px;">
+                    <span style="font-weight: bold;">4.合理化建议类别<label for="" style="color: red;">*</label></span>
+                </div>
+                <div class="input_div" style="margin: auto;text-align:left; padding-left: 4%;margin-bottom: 10px;">
+                    <span style="color: #4f4f4f;font-size: 12px;">质量模块相关建议，请提报到Good Catch通道</span>
+                </div>
+                <div class="input_div" style="margin: auto;text-align: start;padding-left: 4%">
+                    <select name="Idea_Type" style="height: 30px;border-radius: 5px ;width: 50%;" ID="Idea_Type"
+                        required onchange="Input_Saving(this.value)">
+                        <option value="">--选择合理化建议类别--</option>
+                        <option value="安全&环境健康">安全&环境健康</option>
+                        <option value="成本节约（料工费相关）">成本节约（料工费相关）</option>
+                        <option value="Digital （包括数字化系统开发和优化，AI技术运用等）">Digital （包括数字化系统开发和优化，AI技术运用等）</option>
+                        <option value="客户关注">客户关注</option>
+                        <option value="5S">5S</option>
+                        <option value="食堂（执行人请直接写：詹红兵）">食堂（执行人请直接写：詹红兵）</option>
+                        <option value="宿舍（执行人请直接写：周李烨）">宿舍（执行人请直接写：周李烨）</option>
+                        <option value="其他">其他</option>
+                    </select>
+                </div>
+                <div ID="saving" style="display: none;">
+                    <div class="input_div" style="margin: auto;text-align:left; padding-left: 4%;margin-bottom: 10px;">
+                        <span
+                            style="color: #4f4f4f;font-size: 12px;">以下数字只是作为一个基本的成本节约预估参考，不作为最终进入成本节约项目的计算，大家可以按照以下逻辑进行自行估算：人工成本节约预估为42人民币/小时；材料成本和其他成本，按照实际的情况进行计算；</span>
+                    </div>
+                    <div class="input_div" style="margin: auto;text-align: center;">
+                        
+                        <input type="number" ID="SavingValue" placeholder="年化收益预估（只能填数字，单位￥）">
+                    </div>
+                </div>
+            </div>
+
+            <!--问题5 -->
+            <div name="Question5" style="margin-bottom: 40px;">
+                <div class="input_div" style="margin: auto;text-align:left; padding-left: 4%;margin-bottom: 10px;">
+                    <span style="font-weight: bold;">5.合理化建议的综合赋分<label for="" style="color: red;">*</label></span>
+                    <img style="width:90%;padding:10Px" ID="score_img"
+                        src="https://prod-21.westus.logic.azure.com:443/workflows/30e78b7adb8941ea8a9ae2a1f94c0be7/triggers/manual/paths/invoke?api-version=2016-06-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=dv60GXpbbErNMF7Yd6Rw4qK8I6gqpuvTFD3EQMqXEZ4&URL=/Idea System/HTML Source/赋分标准.png">
+                    <table style="width:90%;">
+                        <thead>
+                            <tr style="height: 40px">
+                                <th>维度</th>
+                                <th>0分</th>
+                                <th>1分</th>
+                                <th>3分</th>
+                                <th>5分</th>
+                                <th>10分</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr style="height: 40px">
+                                <td>
+                                    人员
+                                </td>
+                                <td>
+                                    <input required type="radio" name="people_Score" question="5" value=0
+                                        class="big-radio" ID="first_score">
+                                </td>
+                                <td>
+                                    <input required type="radio" name="people_Score" question="5" value=1
+                                        class="big-radio">
+                                </td>
+                                <td>
+                                    <input required type="radio" name="people_Score" question="5" value=3
+                                        class="big-radio">
+                                </td>
+                                <td>
+                                    <input required type="radio" name="people_Score" question="5" value=5
+                                        class="big-radio">
+                                </td>
+                                <td>
+                                    <input required type="radio" name="people_Score" question="5" value=10
+                                        class="big-radio">
+                                </td>
+                            </tr>
+                            <tr style="height: 40px">
+                                <td>
+                                    质量
+                                </td>
+                                <td>
+                                    <input required type="radio" name="quality_Score" question="5" value=0
+                                        class="big-radio">
+                                </td>
+                                <td>
+                                    <input required type="radio" name="quality_Score" question="5" value=1
+                                        class="big-radio">
+                                </td>
+                                <td>
+                                    <input required type="radio" name="quality_Score" question="5" value=3
+                                        class="big-radio">
+                                </td>
+                                <td>
+                                    <input required type="radio" name="quality_Score" question="5" value=5
+                                        class="big-radio">
+                                </td>
+                                <td>
+                                    <input required type="radio" name="quality_Score" question="5" value=10
+                                        class="big-radio">
+                                </td>
+                            </tr>
+                            <tr style="height: 40px">
+                                <td>
+                                    成本
+                                </td>
+                                <td>
+                                    <input required type="radio" name="cost_Score" question="5" value=0
+                                        class="big-radio">
+                                </td>
+                                <td>
+                                    <input required type="radio" name="cost_Score" question="5" value=1
+                                        class="big-radio">
+                                </td>
+                                <td>
+                                    <input required type="radio" name="cost_Score" question="5" value=3
+                                        class="big-radio">
+                                </td>
+                                <td>
+                                    <input required type="radio" name="cost_Score" question="5" value=5
+                                        class="big-radio">
+                                </td>
+                                <td>
+                                    <input required type="radio" name="cost_Score" question="5" value=10
+                                        class="big-radio">
+                                </td>
+                            </tr>
+                            <tr style="height: 40px">
+                                <td>
+                                    客户
+                                </td>
+                                <td>
+                                    <input required type="radio" name="customer_Score" question="5" value=0
+                                        class="big-radio">
+                                </td>
+                                <td>
+                                    <input required type="radio" name="customer_Score" question="5" value=1
+                                        class="big-radio">
+                                </td>
+                                <td>
+                                    <input required type="radio" name="customer_Score" question="5" value=3
+                                        class="big-radio">
+                                </td>
+                                <td>
+                                    <input required type="radio" name="customer_Score" question="5" value=5
+                                        class="big-radio">
+                                </td>
+                                <td>
+                                    <input required type="radio" name="customer_Score" question="5" value=10
+                                        class="big-radio">
+                                </td>
+                            </tr>
+                            <tr style="height: 40px">
+                                <td>
+                                    项目周期
+                                </td>
+                                <td>
+                                    <input required type="radio" name="project_Score" question="5" value=0
+                                        class="big-radio">
+                                </td>
+                                <td>
+                                    <input required type="radio" name="project_Score" question="5" value=1
+                                        class="big-radio">
+                                </td>
+                                <td>
+                                    <input required type="radio" name="project_Score" question="5" value=3
+                                        class="big-radio">
+                                </td>
+                                <td>
+                                    <input required type="radio" name="project_Score" question="5" value=5
+                                        class="big-radio">
+                                </td>
+                                <td>
+                                    <input required type="radio" name="project_Score" question="5" value=10
+                                        class="big-radio">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="font-weight: bold;font-size: 18px;">总分</td>
+                                <td colspan="4" style=" font-weight: bold;font-size: 18px;color: red;" id="total_score">
+                                    <label id="thescore"></label>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+
+            </div>
+
+            <!--问题6 -->
+            <div name="Question6" style="margin-bottom: 40px;">
+                <div class="input_div" style="margin: auto;text-align:left; padding-left: 4%;margin-bottom: 0px;">
+                    <span style="font-weight: bold;">6.建议实施部门<label for="" style="color: red;">*</label></span>
+                </div>
+                <div class="input_div" style="margin: auto;text-align: start;padding-left: 4%">
+                    <div style="display: inline-block;margin-top: 20px;width: 100%;" ID="Dept1">
+                        <label for="first-level">一级部门：</label>
+                        <select id="first-level" class="first-level"
+                            style="height: 30px;border-radius: 5px ;width: 40%;" required
+                            onchange="Dept1_Selected(this.value)">
+                            <option value="">--请选择一级部门--</option>
+                            <option value="我不知道指派给谁也不知道指派给哪个部门">我不知道指派给谁也不知道指派给哪个部门</option>
+                            <option value="我知道指派给哪位同事">我知道指派给哪位同事</option>
+                        </select>
+                    </div>
+                    <div style="display: inline-block;margin-top: 20px;width: 100%;" ID="Dept2">
+                        <label for="second-level">二级部门：</label>
+                        <select id="second-level" disabled required
+                            style="height: 30px;border-radius: 5px ;width: 40%;">
+                            <option value="">--请选择二级部门--</option>
+                        </select>
+                    </div>
+                    <!--  人员搜索 -->
+                    <div ID="search_box" style="width: 100%;display: none;">
+                        <div style="display: inline-block;margin-top: 20px;width: 100%;">
+                            <label for="first-level">指定执行：</label>
+                            <input type='search' class='search-box' ID="search-box1" placeholder='人名/邮箱/UPI'
+                                style=" width: 40%; border-radius: 5px;border: solid 1px;height: 30px;padding-left: 10px;">
+                            <input value="🔍点击搜索" type="button" name="Search" ID="Search" onclick="Search_People('')"
+                                style=" width: auto; border-radius: 5px;border: solid 1px;height: 30px;padding-left: 10px;margin-right: 10px;">
+
+                        </div>
+                        <div style="display: inline-block;margin-top: 20px;width: 100%">
+                            <label for="PeopleInfo_List">搜索结果：</label>
+                            <select id="PeopleInfo_List" name="PeopleInfo_List"
+                                style="height: 30px; width: 40%;border-radius: 5px ; margin-top: 20px" required>
+                                <option value="" ID="First_People">--请先搜索人员--</option>
+                            </select>
+
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+
+
+
+
+            <!--      提交按钮 -->
+            <div style="text-align: start;"><button class="submit" ID="submit"
+                    style="display: block;margin: auto;margin-top: 70px;margin-bottom: 40px;width: 200px;display:block ;"
+                    type="submit">点击提交</button>
+                <input  value="再提交一条" type="button" class="BacktoLogin" ID="BacktoLogin" onclick="location.reload()"
+                    style="display: block;margin: auto;margin-top: 70px;margin-bottom: 40px;width: 200px;display: none;">
+
+            </div>
+        </form>
+
+    </div>
+
+    <!-- UPI与姓名验证 -->
+
+    <script>
+        $(document).ready(function () {
+            /* 设置默认UPI与姓名 */
+            $('#UPI').val(localStorage.getItem("MyUPI"));
+            $('#name').val(localStorage.getItem("MyName"));
+            $('#phone').val(localStorage.getItem("Myphone"));
+        })
+    </script>
+    
+    <script>
+        /* 监听登入界面按钮，验证UPI跟姓名 */
+        document.getElementById('Login-Form').addEventListener('submit', function (e) {
+            e.preventDefault();
+            $('.waitting').css('display', 'block');
+            inputinfo =
+            {
+                name: $('#name').val(),
+                UPI: $('#UPI').val(),
+                phone: $('#phone').val(),
+                dept1: $('#first-level-login').val(),
+                dept2: $('#second-level-login').val()
+            };
+
+            $.ajax({
+                url: 'https://prod-60.westus.logic.azure.com:443/workflows/36d98375033345c296f46667e165502c/triggers/manual/paths/invoke?api-version=2016-06-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=lORbd6imDofut_YNiUwoQ5tA5FJf1Y0mtKwVRPV7_Z4&Function=Login&Employee_No=' + inputinfo.UPI + '&Employee_Name=' + inputinfo.name,
+                method: 'GET',
+                success(response) {
+                    myinfo = response; //自动解析JSON为对象 
+                    if (myinfo.length !== 0) {
+                        //alert('欢迎您!  ' + inputinfo.name);
+                        $('.Login_Div').css('display', 'none');
+                        $('#custom-div').css('display', 'block');
+                        localStorage.setItem("MyUPI", inputinfo.UPI);
+                        localStorage.setItem("MyName", inputinfo.name);
+                        localStorage.setItem("Myphone", inputinfo.phone);
+                        localStorage.setItem("MyUPI", inputinfo.UPI);
+                        localStorage.setItem("MyDept1", inputinfo.dept1);
+                        localStorage.setItem("MyDept2", inputinfo.dept2);
+                        $('.waitting').css('display', 'none');
+
+                    }
+                    else {
+                        alert('您输入的UPI或姓名不存在，请确认后重新输入，谢谢！');
+                        $('.waitting').css('display', 'none');
+                    }
+
+                },
+
+                error(xhr) {
+                    console.error(xhr.status);
+                    alert('网络请求异常，请稍后重试');
+                    $('waitting').css('display', 'none');
+                }
+            });
+        })
+    </script>
+    <!--     //灵感来源填写 -->
+    <script>
+        function Idea_From(a) {
+            if (a == "复制其他案例") {
+                $("#ideafrom_Input").prop("required", true);
+                $("#ideafrom").css('display', 'block')
+            } else {
+                $("#ideafrom_Input").prop("required", false);
+                $("#ideafrom").css('display', 'none')
+            }
+        }
+    </script>
+    <!--     //收益栏 -->
+    <script>
+        function Input_Saving(a) {
+            if (a.match('成本节约')) {
+                $("#SavingValue").prop("required", true);
+                $("#saving").css('display', 'block')
+            } else {
+                $("#SavingValue").prop("required", false);
+                $("#saving").css('display', 'none');
+            };
+            $("#search-box1").val('');
+            PeopleInfo = [];
+            $("#first-level").val('');
+            $("#second-level").val('');
+            $("#second-level").prop("disabled", true);
+            $('#PeopleInfo_List').html('<option value="" ID="First_People">--请先搜索人员--</option>');
+            if (a.includes('詹红兵') || a.includes('周李烨')) {
+                $("#PeopleInfo_List").prop("required", true);
+                $("#search_box").css('display', 'block');
+                Search_People(a);
+                Dept1_Selected('我知道');
+            } else {
+                $("#PeopleInfo_List").prop("required", false);
+                $("#search_box").css('display', 'none');
+                $("#second-level").prop("required", true);
+                $("#Dept2").css('display', 'block');
+            }
+        }
+    </script>
+
+    <script>
+        function Dept1_Selected(a) {
+            $("#PeopleInfo_List").prop("required", false);
+            $("#search_box").css('display', 'none');
+            $("#second-level").prop("required", true);
+            $("#Dept2").css('display', 'block');
+            switch (true) {
+                case a.includes('我不知道'):
+
+                    $("#second-level").prop("required", false);
+                    $("#Dept2").css('display', 'none')
+                    break;
+                case a.includes('我知道'):
+                    $("#PeopleInfo_List").prop("required", true);
+                    $("#search_box").css('display', 'block');
+                    $("#second-level").prop("required", false);
+                    $("#Dept2").css('display', 'none')
+                    break;
+                default:
+                    if ($('#Idea_Type').val().includes('詹红兵') || $('#Idea_Type').val().includes('周李烨')) { $('#Idea_Type').val('') };
+
+            }
+        }
+    </script>
+    <script>
+        /* 搜索人员*/
+        var PeopleInfo = [];
+        var SearchText;
+        function Search_People(a) {
+            /*  $('.waitting').css('display', 'block'); */
+            if (a.includes('詹红兵') || a.includes('周李烨')) {
+                if (a.includes('詹红兵')) { SearchText = '詹红兵' }
+                else { SearchText = '周李烨' };
+                $('#search-box1').val(SearchText);
+                $('#first-level').val('我知道指派给哪位同事');
+            } else { $('.waitting').css('display', 'block'); SearchText = $('#search-box1').val(); };
+
+            $.ajax({
+                url: 'https://prod-60.westus.logic.azure.com/workflows/36d98375033345c296f46667e165502c/triggers/manual/paths/invoke?api-version=2016-06-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=lORbd6imDofut_YNiUwoQ5tA5FJf1Y0mtKwVRPV7_Z4&Function=getpeople&SearchText=' + SearchText,
+                method: 'GET',
+                success(response) {
+                    PeopleInfo = response; //自动解析JSON为对象 
+                    if (PeopleInfo.length !== 0) {
+                        //alert('欢迎您!  ' + inputinfo.name);
+                        $('.waitting').css('display', 'none');
+                        $('#PeopleInfo_List').html('<option value="" ID="First_People">--请先搜索人员--</option>');
+                        $('#First_People').text("-搜索到" + PeopleInfo.length + "条结果，请下拉选择-");
+                        switch (true) {
+
+                            case a.includes('詹红兵') || a.includes('周李烨'):
+
+                                $('#PeopleInfo_List').html(
+                                    PeopleInfo.map(item => (
+                                        $('<option>', {
+                                            text: `${item.field_4} ${item.field_1} ${item.field_15} ${item.field_16}`,
+                                            Name: `${item.field_4}`,
+                                            UPI: `${item.field_1}`,
+                                            EmpNo: `${item.field_2}`,
+                                            Email: `${item.field_23}`,
+                                            Dept1: `${item.field_15}`,
+                                            Dept2: `${item.field_16}`
+                                        })
+                                    ))
+                                );
+
+                                break;
+                            default:
+                                $('#PeopleInfo_List').append(
+                                    PeopleInfo.map(item => (
+                                        $('<option>', {
+                                            text: `${item.field_4} ${item.field_1} ${item.field_15} ${item.field_16}`,
+                                            Name: `${item.field_4}`,
+                                            UPI: `${item.field_1}`,
+                                            EmpNo: `${item.field_2}`,
+                                            Email: `${item.field_23}`,
+                                            Dept1: `${item.field_15}`,
+                                            Dept2: `${item.field_16}`
+
+
+                                        })
+                                    ))
+                                );
+                                $('.waitting').css('display', 'none');
+
+                        }
+
+                    }
+                    else {
+                        alert('您输入的UPI或姓名不存在，请确认后重新输入，谢谢！');
+                        $('.waitting').css('display', 'none');
+                    }
+
+                },
+
+                error(xhr) {
+                    console.error(xhr.status);
+                    alert('网络请求异常，请稍后重试');
+                    $('waitting').css('display', 'none');
+                }
+            });
+        }
+    </script>
+
+    <script>
+        $(document).ready(function () {
+            /* 获取所有部门*/
+            var depts = [];
+            $.ajax({
+                url: 'https://prod-60.westus.logic.azure.com:443/workflows/36d98375033345c296f46667e165502c/triggers/manual/paths/invoke?api-version=2016-06-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=lORbd6imDofut_YNiUwoQ5tA5FJf1Y0mtKwVRPV7_Z4&Function=getdepts',
+                method: 'GET',
+                success(response) {
+                    depts = response;
+
+                    //自动解析JSON为对象 
+                    if (depts.length !== 0) {
+
+                        //创建一级部门选项
+                        $('.first-level').append(
+                            $.unique(depts.filter(item => item.职能一级部门 != '管理员').map(item => item.职能一级部门)).map((value) =>
+                                $('<option>', { value, text: value })
+                            )
+                        );
+
+                        $('#first-level-login').val(localStorage.getItem("MyDept1"));
+                        const val = $('#first-level-login').val();
+                        const $second = $('#second-level-login');
+
+                        $second.html('<option value="">--请选择二级部门--</option>')[0].disabled = !val;
+
+                        if (val) {
+                            depts.filter(item => item.职能一级部门 == val && item.键值.charAt(0) != 'Q').forEach(item =>
+                                $second.append($('<option>', {
+                                    value: item.职能二级部门,
+                                    text: item.职能二级部门,
+                                    coordinator_UPI: item.协调人UPI,
+                                    coordinator_name: item.协调人姓名,
+                                    coordinator_email: item.协调人邮箱,
+
+                                }))
+                            );
+                        };
+                        if (localStorage.getItem("MyDept2")) { $second.val(localStorage.getItem("MyDept2")) };
+
+                        // Step2：联动事件处理
+                        $('#first-level').on('change', function () {
+                            const val = $(this).val();
+                            const $second = $('#second-level');
+
+                            $second.html('<option value="">--请选择二级部门--</option>')[0].disabled = !val;
+
+                            if (val) {
+                                depts.filter(item => item.职能一级部门 == val && item.键值.charAt(0) != 'Q').forEach(item =>
+                                    $second.append($('<option>', {
+                                        value: item.职能二级部门,
+                                        text: item.职能二级部门,
+                                        coordinator_UPI: item.协调人UPI,
+                                        coordinator_name: item.协调人姓名,
+                                        coordinator_email: item.协调人邮箱,
+
+                                    }))
+                                );
+                            }
+                        });
+
+                        $('#first-level-login').on('change', function () {
+
+                            const val = $(this).val();
+                            const $second = $('#second-level-login');
+
+                            $second.html('<option value="">--请选择二级部门--</option>')[0].disabled = !val;
+
+                            if (val) {
+                                depts.filter(item => item.职能一级部门 == val && item.键值.charAt(0) != 'Q').forEach(item =>
+                                    $second.append($('<option>', {
+                                        value: item.职能二级部门,
+                                        text: item.职能二级部门,
+                                        coordinator_UPI: item.协调人UPI,
+                                        coordinator_name: item.协调人姓名,
+                                        coordinator_email: item.协调人邮箱,
+
+                                    }))
+                                );
+                            }
+                        });
+
+
+
+                    }
+                    else {
+                        alert('不能清单获取失败，请刷新浏览器后重试，谢谢！');
+                    }
+
+                },
+                error(xhr) {
+                    console.error(xhr.status);
+                    alert('网络请求异常，请稍后重试');
+                }
+            });
+
+        })
+    </script>
+
+    <!-- 点击图片预览 -->
+
+    <!--     <script>
+        $('#score_img').click(function () {
+            $('#previewImgbox').css('display', 'block');
+            $('#custom-div').css('display', 'none')
+        });
+    </script> -->
+
+    <!-- 表单提交 -->
+    <script>
+        var inputinfo;
+        var myinfo = [];
+        var before = "";
+        var after = "";
+        var ideafrom = "";
+        var ideafrom_Cmm = "";
+        var idea_Type = "";
+        var saving = "";
+        var people_Score = "";
+        var quality_score = "";
+        var cost_score = "";
+        var customer_score = "";
+        var project_score = "";
+        var total_score = "";
+        var execute_dept1 = "";
+        var execute_dept2 = "";
+        var dept_appvover_email = "";
+        var dept_appvover_name = "";
+        var dept_appvover_UPI = 0;
+        var execute_name = "";
+        var execute_UPI = 0;
+        var execute_email = "";
+        var status = '待批准';
+        var status_val = '2';
+        var before_img;
+        var base64Image;
+        var imgname = "无图";
+
+        //打分
+        $(document).ready(function () {
+            $("input[question='5']").click(
+                function () {
+                    //人员分
+                    people_score = $("input[question='5'][name='people_Score']:checked").val();
+                    //质量分
+                    quality_score = $("input[question='5'][name='quality_Score']:checked").val();
+                    //成本分
+                    cost_score = $("input[question='5'][name='cost_Score']:checked").val();
+                    //客户分
+                    customer_score = $("input[question='5'][name='customer_Score']:checked").val();
+                    //项目周期分
+                    project_score = $("input[question='5'][name='project_Score']:checked").val();
+                    //总分
+                    total_score = people_score * 1.5 + quality_score * 1.5 + cost_score * 3.5 + customer_score * 2.5 + project_score * 1
+                    $('#total_score').html('<label id="thescore">' + total_score + '</label>');
+
+                }
+            )
+        });
+        //提交按钮
+        $(document).ready(function () {
+            $("button[type='submit']").click(
+
+                function (event) {
+                    // Step1:阻止按钮默认行为（包括可能的reset功能）
+                    event.preventDefault();
+
+                    // Step2:检查必填项是否完成（假设必填项有required类）
+                    let $firstEmptyField = null;
+                    let isValid = true;
+                    $("[required]").each(function () {
+                        if (!$(this).val()) {
+                            isValid = false;
+                            $(this).addClass("error"); //标记错误项 
+                            return false; //终止循环 
+                        }
+                    });
+
+                    // 检查必填项并记录第一个空白项
+                    $("[required]", this.form).each(function () {
+                        if (!$.trim(this.value)) {
+                            $(this).addClass("error");
+                            if (!$firstEmptyField) {
+                                $firstEmptyField = $(this);
+                            }
+                        } else {
+                            $(this).removeClass("error");
+                        }
+                    });
+
+                    // Step2 - 自动聚焦或提交处理
+                    if ($firstEmptyField) {
+                        $firstEmptyField.focus(); // ✨关键点：自动聚焦到第一个空白项
+
+                        // Optional: Toast提示错误 (示例使用alert)
+                        alert(`请先完成必填项`);
+
+                        // Optional: Jquery UI动画效果增强提示 
+                        $firstEmptyField.effect("highlight", { color: "#ff9999" }, 1000);
+
+                        return false; //阻止后续执行
+                    }
+
+                    if (!$("input[name='合理化建议的灵感来源']:checked").val()) {
+                        $('#复制其他案例').focus();
+
+                        // Optional: Toast提示错误 (示例使用alert)
+                        alert(`请先选择建议类型`);
+
+                        // Optional: Jquery UI动画效果增强提示 
+                        $firstEmptyField.effect("highlight", { color: "#ff9999" }, 1000);
+
+                        return false; //阻止后续执行
+                    }
+
+                    if (isNaN(parseInt($('#thescore').text()))) {
+                        $('#first_score').focus(); // ✨关键点：自动聚焦到第一个空白项
+
+                        // Optional: Toast提示错误 (示例使用alert)
+                        alert(`请先完成评分`);
+
+                        // Optional: Jquery UI动画效果增强提示 
+                        $firstEmptyField.effect("highlight", { color: "#ff9999" }, 1000);
+
+                        return false; //阻止后续执行
+                    }
+
+                    // Step3:仅当必填项完成时才执行后续逻辑 
+                    if (isValid && !isNaN(parseInt($('#thescore').text()))) {
+                        console.log("验证通过,执行提交逻辑...");
+                        //这里写你的业务逻辑或手动触发表单提交：
+
+                        //现状
+                        before = $('#before').val();
+                        //建议
+                        after = $('#after').val();
+                        //灵感来源
+                        ideafrom = $("input[name='合理化建议的灵感来源']:checked").val();
+                        //灵感来源其他案例的说明
+                        if (ideafrom == '复制其他案例') {
+                            ideafrom_Cmm = $('#ideafrom_Input').val();
+                        };
+                        //建议类型
+                        idea_Type = $('#Idea_Type').val();
+                        //成本节约
+                        if (idea_Type.includes('成本节约')) {
+                            saving = $('#SavingValue').val();
+                        };
+                        //清空变量
+
+                        execute_dept1 = "";
+                        execute_dept2 = "";
+                        dept_appvover_email = "";
+                        dept_appvover_name = "";
+                        dept_appvover_UPI = 0;
+                        execute_name = "";
+                        execute_UPI = 0;
+                        execute_email = "";
+
+                        before_img = $('#image-before')[0].files[0];
+                        //实施部门 状态 实施人信息 协调人信息 
+                        switch (true) {
+                            case idea_Type.includes('食堂') || idea_Type.includes('宿舍') || $('#first-level').val().includes('我知道'):
+                                status = '待实施';
+                                status_val = '3';
+                                dept_appvover_name = 'System';
+                                dept_appvover_email = "";
+                                dept_appvover_UPI = "";
+                                execute_dept1 = $('#PeopleInfo_List option:selected').attr('dept1');
+                                execute_dept2 = $('#PeopleInfo_List option:selected').attr('dept2');
+                                execute_name = $('#PeopleInfo_List option:selected').attr('name');
+                                execute_UPI = $('#PeopleInfo_List option:selected').attr('upi');
+                                execute_email = $('#PeopleInfo_List option:selected').attr('email');
+                                break;
+                            case $('#first-level').val().includes('我不知道'):
+                                status = '待协调';
+                                status_val = '1';
+                                execute_dept1 = '我不知道'
+                                break;
+                            default:
+                                status = '待批准';
+                                status_val = '2';
+                                dept_appvover_name = $('#second-level option:selected').attr('coordinator_name');
+                                dept_appvover_email = $('#second-level option:selected').attr('coordinator_email');
+                                dept_appvover_UPI = $('#second-level option:selected').attr('coordinator_upi');
+                                execute_dept1 = $('#first-level').val();
+                                execute_dept2 = $('#second-level').val();
+
+                        };
+                        debugger;
+                        //发送               
+                        $('.waitting').css('display', 'block');
+
+
+
+
+
+                        $.ajax({
+                            url: 'https://prod-133.westus.logic.azure.com:443/workflows/820b8950a9d94a1ba05e4e3ebcdfa80f/triggers/manual/paths/invoke?api-version=2016-06-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=ppEfHPAvg9cxZmR3MgOJkBeWheeJ4l6x_NyH8pMWYEs', // 替换为实际的URL
+                            type: 'POST',
+                            contentType: 'application/json',
+                            data: JSON.stringify({
+                                "当前状态_数值": status_val,
+                                "当前状态": status,
+                                "当前状态_Img": base64Image,
+                                "图片名称": imgname,
+                                "发起人姓名": inputinfo.name,
+                                "发起人邮箱": myinfo[0].field_23,
+                                "发起人联系电话": inputinfo.phone,
+                                "发起人UPI": toNumber(myinfo[0].field_1),
+                                "发起人工号": myinfo[0].field_2,
+                                "发起人上司": myinfo[0].field_25,
+                                "发起人上司邮箱": myinfo[0].OData__x76f4__x5c5e__x4e0a__x53f8__x90,
+                                "发起人上司UPI": toNumber(myinfo[0].field_12),
+                                "发起人一级部门": inputinfo.dept1,
+                                "发起人二级部门": inputinfo.dept2,
+                                "现状及问题": before,
+                                "建议改进方向": after,
+                                "被复制的来源": ideafrom_Cmm,
+                                "Idea灵感来源": ideafrom,
+                                "打分_人员": people_score,
+                                "打分_成本": cost_score,
+                                "打分_客户": customer_score,
+                                "打分_质量": quality_score,
+                                "打分_项目周期": project_score,
+                                "总分": total_score,
+                                "合理化建议类别": idea_Type,
+                                "预估年化收益": saving,
+                                "协调人UPI": 0,
+                                "协调人邮箱": "",
+                                "协调人姓名": "",
+                                "实施一级部门": execute_dept1,
+                                "实施二级部门": execute_dept2,
+                                "实施批准人UPI": toNumber(dept_appvover_UPI),
+                                "实施批准人姓名": dept_appvover_name,
+                                "实施批准人邮箱": dept_appvover_email,
+                                "执行人UPI": toNumber(execute_UPI),
+                                "执行人邮箱": execute_email,
+                                "执行人姓名": execute_name
+
+
+                            }),
+                            success: function (response, status, xhr) {
+                                if (xhr.status === 200) {
+
+                                    console.log('成功：', response);
+                                    $('#Submit-Form :input').prop('disabled', true);
+                                    $('#BacktoLogin').prop('disabled', false);
+                                    $('#submit').css('display', 'none');
+                                    $('#BacktoLogin').css('display', 'block');
+                                    $('.waitting').css('display', 'none');
+
+                                }
+                            },
+                            error: function (error) {
+
+                                console.log('表单提交失败', error);
+                                $('.waitting').css('display', 'none');
+                            }
+                        });
+
+
+
+
+
+
+
+
+
+
+                    } else {
+                        console.warn("请完成必填项!");
+                    }
+                }
+
+
+            )
+        });
+
+        //再提交一条
+
+        function BacktoLogin() {
+            location.reload()
+
+        }
+    </script>
+
+
+    <!--    //图片转base64 -->
+    <script>
+        $('#image-before').on('change', function () {
+
+
+            var file = this.files[0];
+
+            if (file) {
+                imgname = file.name;
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                    base64Image = e.target.result;
+                    $('#preview').attr('src', base64Image);
+                    $('#preview').css('display', 'block');
+                    console.log("Base64 Image:", base64Image);
+                    console.log("Image Name:", imgname);
+                };
+
+                reader.readAsDataURL(file);
+            } else {
+                debugger;
+                $('#preview').css('display', 'none')
+                base64Image = null;
+                imgname = "无图";
+                console.log("Image Name:", imgname);
+                console.log("No image selected.");
+            }
+        });
+    </script>
+    <script>
+        function toNumber(str) {
+            // 检查是否是纯数字（可选负号、小数点）
+            if (/^-?\d+(\.\d+)?$/.test(str)) {
+                return parseFloat(str);
+            }
+            return 0; // 非纯数字返回0
+        }
+
+    </script>
+
+</body>
+
+</html>
